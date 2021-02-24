@@ -14,5 +14,4 @@ func TestSayHelo(t *testing.T) {
 	}
 
 	assert.Equal(t, "Hello", SayHello())
-	sayHelloMock = nil
 }

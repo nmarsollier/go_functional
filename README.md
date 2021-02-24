@@ -53,20 +53,15 @@ Nuestro Service es un poquito mas complejo, pero no llega a ser tan complejo com
 
 ```
 // Nos va a permitir mockear respuestas para los tests
-var sayHelloMock func() string = nil
+var sayHelloMock func() string = dao.Hello
 
 // SayHello es nuestro negocio
 func SayHello() string {
-	if sayHelloMock != nil {
-		return sayHelloMock()
-	}
-
-	return dao.Hello()
+	return sayHelloMock()
 }
 ```
 
 Dado que nuestro servicio es algo que debemos poder testear usando mocks de DAO, no nos quedan muchas opciones que permitirnos mockear esta función con un puntero a función. 
-En caso que el if nos cause ruido, podemos apuntar directamente el puntero sayHelloMock a la función original, y nos evitamos ese if de mas.
 
 El test en cuestión es el siguiente :
 
@@ -78,7 +73,6 @@ sayHelloMock = func() string {
 }
 
 assert.Equal(t, "Hello", SayHello())
-sayHelloMock = nil
 ```
 
 La estrategia de utilizar un puntero a una función, conceptualmente es la misma que utilizar una interfaz, en su forma mas simple un puntero a una función define una interfaz a respetar.
@@ -97,6 +91,24 @@ Este concepto de programar en forma funcional simplifica mucho la programación 
 - Llevamos el concepto de [Interface segregation](https://en.wikipedia.org/wiki/Interface_segregation_principle) a su mínima expresión, una función, algo deseable en POO
 
 Incluso podemos hacer strategy si planificamos bien los factories, sin necesidad del uso de interfaces.
+
+## Tests en paralelo
+
+Existe un problema si queremos ejecutar los test en paralelo, porque al cambiar una función estaríamos interfiriendo con los tests en paralelo que llamen a esa función.
+
+Afortunadamente Go no ejecuta tests en paralelo, y es algo que debemos configurar a mano y ademas podemos estratégicamente evitar cuando estamos testeando.
+
+Ahora si necesitamos si o si ejecutar nuestros tests en paralelo, una estrategia posible es, definir una sola función mock para todos los tests y hacerla suficientemente inteligente como para retornar diferentes valores, para todos los tests.
+Esto lo podemos identificar con algún parámetro en particular.
+
+```
+fetchUserMock = func(id string) (User, error) {
+   // aca podemos evaluar el id y usar diferentes id en los tests
+	 // para retornar diferentes valores 
+
+```
+
+Si por el contrario nuestra función no recibe ningún parámetro como para identificar quien lo llama, podríamos usar runtime.Caller para identificar quien lo llama, de forma tal que podamos evaluar que resultado dar para cada caso.
 
 ## Opinión personal sobre POO
 
