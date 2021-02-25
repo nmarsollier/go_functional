@@ -16,7 +16,7 @@ Ahora bien, si en lugar de tomar un enfoque OO, aprovechamos las capacidades de 
 
 ### Go en forma Funcional ? se puede.
 
-Siguiendo los lineamientos de single Responsability debería ser bastante común en nuestro código tener servicios con una sola función.
+Siguiendo los lineamientos de single Responsibility debería ser bastante común en nuestro código tener servicios con una sola función.
 
 Analicemos que significa en el código anterior, la siguiente estructura :
 
@@ -81,16 +81,26 @@ Es medio hacky ? si pero como dije antes, si algo puede ser hacky es el test.
 
 ### Ventajas de este enfoque 
 
-Este concepto de programar en forma funcional simplifica mucho la programación tradicional, y en la mayoría de las soluciones es el balance ideal porque es la forma mas simple de definir, entender y mantener código. 
+Este concepto de programar en forma funcional simplifica mucho el paradigma OO, y en la mayoría de las soluciones es el balance ideal porque es la forma mas simple de definir, entender y mantener código. 
 
-- No tenemos que escribir una interfaz, ni una estructura, tan solo para mockear
-- No hacemos DI
-- Single Responsibility
+Los patrones que conocemos OO, se vuelven obsoletos, y debemos leer algo sobre como programar en el paradigma funcional, pero lo bueno del paradigma funcional, es que no existen muchos patrones, los patrones son bastante simples e intuitivos.
+
+---
+De [Functional Programming For The Rest of Us](http://www.defmacro.org/2006/06/19/fp.html)
+
+Functional languages are extremely expressive. In a functional language one does not need design patterns because the language is likely so high level, you end up programming in concepts that eliminate design patterns all together.
+
+---
+
+Algunas ventajas:
+
+- El testing es mas sencillo
+- La solución es mas natural, no lidiamos con tantos patrones OO 
+- No tenemos tantos problemas de concurrencia
 - Código mas simple de leer y mantener
 - Podemos visualizar mejor la programación declarativa del paradigma funcional
-- Llevamos el concepto de [Interface segregation](https://en.wikipedia.org/wiki/Interface_segregation_principle) a su mínima expresión, una función, algo deseable en POO
 
-Incluso podemos hacer strategy si planificamos bien los factories, sin necesidad del uso de interfaces.
+Incluso podemos hacer polimorfismo y estrategias sin planificar demasiado.
 
 ## Tests en paralelo
 
