@@ -9,7 +9,7 @@ import (
 func TestSayHelo(t *testing.T) {
 	// Cuando testeamos la reescribimos con el
 	// mock que queramos
-	sayHelloMock = func() string {
+	sayHelloFunc = func() string {
 		return "Hello"
 	}
 
