@@ -1,3 +1,4 @@
+[English Version](https://github.com/nmarsollier/go_functional/blob/main/README_en.md)
 # Un enfoque mas funcional de Go
 
 En entornos de microservicios, la mayoría de nuestro código es privado al proyecto, o mas bien propio del microservicio, nuestro código es generalmente interno, por los que la implementación interna del código, no tiene porque ser compleja ni escalable ni adaptable. 
@@ -175,4 +176,4 @@ En las empresas en general mas de la mitad de los desarrolladores tendrán poca 
 
 Esta es una serie de notas sobre patrones simples de programación en GO.
 
-[Tabla de Contenidos](https://github.com/nmarsollier/go_index)
+[Tabla de Contenidos](https://github.com/nmarsollier/go_index/blob/main/README.md)
