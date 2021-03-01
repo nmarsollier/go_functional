@@ -1,6 +1,6 @@
 package service
 
-import "github.com/nmarsollier/go_di_ioc/go_funcional/dao"
+import "github.com/nmarsollier/go_di_ioc/go_funcional/model/hello/dao"
 
 // Nos va a permitir mockear respuestas para los tests
 var sayHelloFunc func() string = dao.Hello
