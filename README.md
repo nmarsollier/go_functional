@@ -24,7 +24,7 @@ Los servicios con mas de una responsabilidad son muy dificiles de seguir, leer y
 
 Analicemos que significa en el código anterior, la siguiente estructura :
 
-```
+```go
 // HelloService es el servicio de negocio
 type HelloService struct {
 	dao IHelloDao
@@ -39,7 +39,7 @@ Que tal si nos evitamos todo esto y vamos directo a una solución donde no exist
 
 Nuestro archivo main, entonces no necesita crear ningún instancia, solo llamamos a una función :
 
-```
+```go
 func main() {
 	fmt.Println(service.SayHello())
 }
@@ -47,7 +47,7 @@ func main() {
 
 Nuestro DAO es muy simple también, es solo una función.
 
-```
+```go
 func Hello() string {
 	return "Holiiiiis"
 }
@@ -55,7 +55,7 @@ func Hello() string {
 
 Nuestro Service es un poquito mas complejo, pero no llega a ser tan complejo como usar interfaces :
 
-```
+```go
 // Es un puntero privado, nos va a permitir mockear los tests, en prod no hay diferencia.
 var sayHelloFunc func() string = dao.Hello
 
@@ -69,7 +69,7 @@ Dado que nuestro servicio es algo que debemos poder testear usando mocks de DAO,
 
 El test en cuestión es el siguiente :
 
-```
+```go
 // Cuando testeamos la reescribimos con el
 // mock que queramos
 sayHelloFunc = func() string {
@@ -121,7 +121,7 @@ Afortunadamente Go no ejecuta tests en paralelo, y es algo que debemos configura
 Ahora si necesitamos si o si ejecutar nuestros tests en paralelo, una estrategia posible es, definir una sola función mock para todos los tests y hacerla suficientemente inteligente como para retornar diferentes valores, para todos los tests.
 Esto lo podemos identificar con algún parámetro en particular.
 
-```
+```go
 fetchUserMock = func(id string) (User, error) {
    // aca podemos evaluar el id y usar diferentes id en los tests
 	 // para retornar diferentes valores 

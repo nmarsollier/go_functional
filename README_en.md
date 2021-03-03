@@ -25,7 +25,7 @@ Services with mora than one responsibility are hard to follow, read and maintain
 
 Lets talk about the next struct :
 
-```
+```go
 // HelloService this is the business service
 type HelloService struct {
 	dao IHelloDao
@@ -40,7 +40,7 @@ What if we avoid all these things, and we just use a direct call to a function w
 
 The main file, does not needs any instance, and we just call a function :
 
-```
+```go
 func main() {
 	fmt.Println(service.SayHello())
 }
@@ -48,7 +48,7 @@ func main() {
 
 The DAO is very simple too, it is just a function.
 
-```
+```go
 func Hello() string {
 	return "Holiiiiis"
 }
@@ -56,7 +56,7 @@ func Hello() string {
 
 The service is a little bit more complex, but simpler that previous implementations :
 
-```
+```go
 // It's a private pointer that allow us to mock it.
 var sayHelloFunc func() string = dao.Hello
 
@@ -70,7 +70,7 @@ Due that the service is something that we need to test, to allow mock the DAO, w
 
 The test is :
 
-```
+```go
 // Mock the dao
 sayHelloFunc = func() string {
 	return "Hello"
@@ -120,7 +120,7 @@ Lucky that Go does not run tests in parallel by default, is something that we ne
 
 Now if we need to run tests in parallel, and it's not an option, one strategy is to mock only one time, and return different responses accoding to some parameter in the mocked function, so all the tests use the same mock.
 
-```
+```go
 fetchUserMock = func(id string) (User, error) {
    // here we check the id, and return different responses 
 	 // according the the id 
